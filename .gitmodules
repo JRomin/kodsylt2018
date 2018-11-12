@@ -1,0 +1,9 @@
+[submodule "lume"]
+	path = lume
+	url = https://github.com/rxi/lume.git
+[submodule "hump"]
+	path = hump
+	url = https://github.com/vrld/hump
+[submodule "sti"]
+	path = sti
+	url = https://github.com/karai17/Simple-Tiled-Implementation.git
