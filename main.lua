@@ -1,5 +1,5 @@
 local sti = require "sti/sti"
-local bump = require "lib/bump/bump"
+local bump = require "bump.lua/bump"
 local map
 local world
 local objects = {}
