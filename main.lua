@@ -31,9 +31,7 @@ function love.load()
 	map:bump_init(world)
 
 	-- Create a Custom Layer
-	local layer = map:addCustomLayer("Sprites", 3)
-
-  --local playerTemp
+	--local layer = map:addCustomLayer("Sprites", 3)
 
   player = playerClass.new(0, 0, world)
   for k, object in pairs(map.objects) do
@@ -46,19 +44,7 @@ function love.load()
           break
       end
   end
-  --player = playerClass.new(playerTemp.x, playerTemp.y, world)
-  --objects.player = {}
-  --objects.player = { name = "Player" , x = player.x, y = player.y}
-  --objects.player.body = love.physics.newBody(world, player.x, player.y, "dynamic")
-  --objects.player.shape = love.physics.newRectangleShape(70, 70)
-  --objects.player.world = world
-  --objects.player.fixture = love.physics.newFixture(objects.player.body, objects.player.shape, 1)
-  --objects.player.fixture.setUserData(objects.player)
-
-  --world:add(player,player.x, player.y, 66, 92)
-  --print(world:check(objects.player))
-
-map:removeLayer("System")
+  map:removeLayer("System")
 
 end
 
@@ -117,13 +103,6 @@ function love.draw()
       --self.player.oy
   )
 
-	-- Draw Collision Map (useful for debugging)
 	love.graphics.setColor(255, 0, 0)
-	--map:box2d_draw(tx, ty)
-  --map:bump_draw(tx, ty, 1, 1)
---love.graphics.print(world, 50,50)
-love.graphics.print("Test 2", 50, 75)
-	-- Please note that map:draw, map:box2d_draw, and map:bump_draw take
-	-- translate and scale arguments (tx, ty, sx, sy) for when you want to
-	-- grow, shrink, or reposition your map on screen.
+  love.graphics.print("Test 2", 50, 75)
 end
