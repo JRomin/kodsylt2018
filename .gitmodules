@@ -7,6 +7,3 @@
 [submodule "sti"]
 	path = sti
 	url = https://github.com/karai17/Simple-Tiled-Implementation.git
-[submodule "bump.lua"]
-	path = bump.lua
-	url = git@github.com:kikito/bump.lua.git
