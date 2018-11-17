@@ -1,9 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="70" tileheight="70" infinite="0" nextlayerid="3" nextobjectid="2">
  <tileset firstgid="1" name="tiles_spritesheet" tilewidth="70" tileheight="70" spacing="2" margin="1" tilecount="156" columns="12">
-  <image source="../../../Downloads/Platformer Art Complete Pack_0/Base pack/Tiles/tiles_spritesheet.png" width="914" height="936"/>
+  <image source="assets/levels/tiles_spritesheet.png" width="914" height="936"/>
+  <tile id="0">
+   <objectgroup draworder="index">
+    <object id="4" x="2" y="1" width="65" height="66"/>
+   </objectgroup>
+  </tile>
+  <tile id="2" type="ground">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+   </properties>
+   <objectgroup draworder="index">
+    <object id="1" x="2" y="2" width="67" height="36"/>
+   </objectgroup>
+  </tile>
+  <tile id="49" type="wall">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+   </properties>
+   <objectgroup draworder="index">
+    <object id="1" x="1" y="1" width="67" height="68"/>
+   </objectgroup>
+  </tile>
  </tileset>
- <layer id="1" name="Tile Layer 1" width="100" height="100">
+ <layer id="1" name="Tile Layer 1" width="100" height="100" locked="1">
   <properties>
    <property name="collidable" type="bool" value="true"/>
   </properties>
@@ -110,7 +131,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="2" name="System" locked="1">
-  <object id="1" name="Player" type="Player" x="208.452" y="348.605" width="70" height="65.8198"/>
+ <objectgroup id="2" name="System">
+  <object id="1" name="Player" type="Player" x="208.452" y="310.376" width="70" height="65.8198"/>
  </objectgroup>
 </map>
