@@ -6,6 +6,7 @@ local objects = {}
 require "player"
 local enemies = {}
 local player
+local lovephysics
 
 function love.load()
 	-- Grab window size
@@ -23,7 +24,7 @@ function love.load()
 
 	-- Prepare physics world with horizontal and vertical gravity
 
-  lovephysics = love.physics.newWorld(0, 0, true)
+  lovephysics = love.physics.newWorld(0, 9.81 * 70, true)
 --  world:setCallbacks(beginContact, endContact, preSolve, postSolve)
 
 
@@ -53,7 +54,8 @@ function love.update(dt)
   local speed = 140
   if love.keyboard.isDown("w") or love.keyboard.isDown("up") then
       --player.y = player.y - speed * dt
-      player:doJump()
+      --player:doJump()
+      player.body:applyForce(400, 0)
   end
 
   -- Move player down

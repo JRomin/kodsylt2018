@@ -12,6 +12,10 @@ playerClass.new = function(x, y, bumpWorld, physicsWorld)
 
     bumpWorld:add(self,self.x, self.y, self.width, self.height)
 
+    self.body = love.physics.newBody(physicsWorld, self.x, self.y)
+    self.shape = love.physics.newRectangleShape(self.width, self.height)
+    self.fixture = love.physics.newFixture(self.body, self.shape)
+
     self.health = 100
     self.sprite = love.graphics.newImage("assets/player/p1_stand.png")
 
