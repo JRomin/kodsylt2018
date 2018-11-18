@@ -23,7 +23,7 @@ function love.load()
 
 	-- Prepare physics world with horizontal and vertical gravity
 
---	world = love.physics.newWorld(0, 0, true)
+  lovephysics = love.physics.newWorld(0, 0, true)
 --  world:setCallbacks(beginContact, endContact, preSolve, postSolve)
 
 
@@ -33,7 +33,7 @@ function love.load()
 	-- Create a Custom Layer
 	--local layer = map:addCustomLayer("Sprites", 3)
 
-  player = playerClass.new(0, 0, world)
+  player = playerClass.new(0, 0, world, lovephysics)
   for k, object in pairs(map.objects) do
       if object.name == "Player" then
           --playerTemp = object
@@ -52,13 +52,14 @@ function love.update(dt)
   --world:update(dt)
   local speed = 140
   if love.keyboard.isDown("w") or love.keyboard.isDown("up") then
-      player.y = player.y - speed * dt
+      --player.y = player.y - speed * dt
+      player:doJump()
   end
 
   -- Move player down
-  if love.keyboard.isDown("s") or love.keyboard.isDown("down") then
-      player.y = player.y + speed * dt
-  end
+  --if love.keyboard.isDown("s") or love.keyboard.isDown("down") then
+  --    player.y = player.y + speed * dt
+  --end
 
   -- Move player left
   if love.keyboard.isDown("a") or love.keyboard.isDown("left") then
@@ -76,9 +77,10 @@ function love.update(dt)
   ---- deal with the collisions
   for i=1,len do
     print('collided with ' .. tostring(cols[i].other))
+    player.jump = false
   end
 
-
+  player:update(dt)
 	map:update(dt)
 end
 
