@@ -18,9 +18,9 @@ function love.load()
 
 
 
-  world = bump.newWorld(70)
+  --world = bump.newWorld(70)
 	-- Load a map exported to Lua from Tiled
-	map = sti("testTest1.lua",{ "bump" })
+	map = sti("testTest1.lua",{ "box2d" })
 
 	-- Prepare physics world with horizontal and vertical gravity
 
@@ -29,7 +29,8 @@ function love.load()
 
 
 	-- Prepare collision objects
-	map:bump_init(world)
+	--map:bump_init(world)
+  map:box2d_init(lovephysics)
 
 	-- Create a Custom Layer
 	--local layer = map:addCustomLayer("Sprites", 3)
@@ -56,6 +57,7 @@ function love.update(dt)
       --player.y = player.y - speed * dt
       --player:doJump()
       player.body:applyForce(400, 0)
+      player.body:applyLinearImpulse(0,-300)
   end
 
   -- Move player down
@@ -71,17 +73,19 @@ function love.update(dt)
 
   -- Move player right
   if love.keyboard.isDown("d") or love.keyboard.isDown("right") then
-      player.x = player.x + speed * dt
+      --player.x = player.x + speed * dt
+      player.body:applyLinearImpulse(10, 0)
   end
   --world:update(objects.player, self.player.x, self.player.y )
-  local actualX, actualY, cols, len = world:move(player, player.x, player.y)
-  player.x, player.y = actualX, actualY
-  ---- deal with the collisions
-  for i=1,len do
-    print('collided with ' .. tostring(cols[i].other))
-    player.jump = false
-  end
+  --local actualX, actualY, cols, len = world:move(player, player.x, player.y)
+  --player.x, player.y = actualX, actualY
+  ------ deal with the collisions
+  --for i=1,len do
+  --  print('collided with ' .. tostring(cols[i].other))
+  --  player.jump = false
+  --end
 
+  lovephysics:update(dt)
   player:update(dt)
 	map:update(dt)
 end
