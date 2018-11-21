@@ -6,41 +6,38 @@ playerClass.new = function(x, y, bumpWorld, physicsWorld)
     self.y = y
     self.width = 66
     self.height = 92
-    self.jump = false
-    self.jumpDirection = 0
-    self.jumpOffset = 0
+    self.jumpCount = 0
+    self.type = "player"
 
     --bumpWorld:add(self,self.x, self.y, self.width, self.height)
 
     self.body = love.physics.newBody(physicsWorld, self.x, self.y,"dynamic")
-    self.shape = love.physics.newRectangleShape(self.width, self.height)
-    self.fixture = love.physics.newFixture(self.body, self.shape)
+    self.shape = love.physics.newRectangleShape(0,0,self.width, self.height)
+    self.fixture = love.physics.newFixture(self.body, self.shape, 1)
     self.fixture:setFriction(1.0)
+    self.fixture:setUserData(self)
+    self.body:setPosition(self.x,self.y)
+    self.body:setMass(1)
+--    self.body:setLinearDamping(0.1)
+    self.body:setFixedRotation(true)
 
     self.health = 100
     self.sprite = love.graphics.newImage("assets/player/p1_stand.png")
 
     self.doJump = function()
-        self.jump = true
-        self.jumpDirection = -1
-        self.jumpOffset = 0
+      self.jumpCount = self.jumpCount + 1
+      if self.jumpCount < 5 then
+        self.body:applyLinearImpulse(0,-100)
+      end
+    end
+
+    self.landed = function()
+      self.jumpCount = 0
     end
 
     self.update = function(self, dt)
       local speed = 140
-      if self.jump then
-        self.jumpOffset = self.jumpOffset + self.jumpDirection
-        print(self.jumpOffset)
-        self.y = self.y + (self.jumpDirection * speed * dt)
-        if self.jumpOffset > 20 and self.jumpDirection == 1 then
-          --self.jumpDirection = -1
-          self.jump = false
-        end
-        if self.jumpOffset < -20 and self.jumpDirection == -1 then
-          --self.jump = false
-          self.jumpDirection = 1
-        end
-      end
+
 
     end
 
