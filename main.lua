@@ -7,6 +7,7 @@ require "player"
 local enemies = {}
 local player
 local lovephysics
+Camera = require "hump.camera"
 
 function love.load()
 	-- Grab window size
@@ -43,6 +44,7 @@ function love.load()
           print("Setup player!")
           print(object.id)
           player = playerClass.new(object.x, object.y, world, lovephysics)
+          camera = Camera(player.body:getX(), player.body:getY())
           break
       end
   end
@@ -95,6 +97,9 @@ function love.update(dt)
 	map:update(dt)
   player:update(dt)
 
+  local dx,dy = player.body:getX() - camera.x, player.body:getY() - camera.y
+  camera:move(dx/2, dy/2)
+
   if string.len(text) > 768 then    -- cleanup when 'text' gets too long
         text = ""
     end
@@ -109,6 +114,8 @@ function love.draw()
   local ty = math.floor(player.y - love.graphics.getHeight() / 2)
   --love.graphics.translate(-tx, -ty)
 
+camera:attach()
+local cx,cy = camera:position()
 	-- Draw the map and all objects within
 	love.graphics.setColor(255, 255, 255)
 	map:draw()
@@ -135,6 +142,7 @@ function love.draw()
 
 	love.graphics.setColor(255, 0, 0)
   love.graphics.print(text, 50, 75)
+  camera:detach()
 end
 
 function beginContact(a, b, coll)
