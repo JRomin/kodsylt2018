@@ -110,15 +110,19 @@ end
 function love.draw()
   local showBoundingBoxes = true
   --local player = map.layers["Sprites"].player
-  local tx = math.floor(player.x - love.graphics.getWidth() / 2)
-  local ty = math.floor(player.y - love.graphics.getHeight() / 2)
+  local tx = math.floor(player.body:getX() - love.graphics.getWidth() / 2)
+  local ty = math.floor(player.body:getY() - love.graphics.getHeight() / 2)
   --love.graphics.translate(-tx, -ty)
 
 camera:attach()
 local cx,cy = camera:position()
+local offset_x = (cx - love.graphics.getWidth()) / 2
+local offset_y = (cy - love.graphics.getHeight()) / 2
+local dx,dy = player.body:getX() - camera.x, player.body:getY() - camera.y
+print("X "..(tx).." Y "..(ty))
 	-- Draw the map and all objects within
 	love.graphics.setColor(255, 255, 255)
-	map:draw()
+	map:draw(-tx, -ty)
   if showBoundingBoxes then
     map:box2d_draw()
   end
