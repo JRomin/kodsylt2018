@@ -4,10 +4,14 @@ local map
 local world
 local objects = {}
 require "player"
+require "bonus"
 local enemies = {}
 local player
 local lovephysics
 local bonuses = {}
+local score = 0
+local gameState = "playing"
+local attempts = 0
 Camera = require "hump.camera"
 
 function love.load()
@@ -22,25 +26,43 @@ function love.load()
 
   --world = bump.newWorld(70)
 	-- Load a map exported to Lua from Tiled
-	map = sti("testTest1.lua",{ "box2d" })
+
 
 	-- Prepare physics world with horizontal and vertical gravity
 
-  lovephysics = love.physics.newWorld(0, 9.81 * 70, true)
-  lovephysics:setCallbacks(beginContact, endContact, preSolve, postSolve)
+
 --  world:setCallbacks(beginContact, endContact, preSolve, postSolve)
 
 
 	-- Prepare collision objects
 	--map:bump_init(world)
-  map:box2d_init(lovephysics)
+
 
 	-- Create a Custom Layer
 	--local layer = map:addCustomLayer("Sprites", 3)
 
 
+  loadWorld()
+
+
+  text       = ""   -- we'll use this to put info text on the screen later
+  persisting = 0
+  --topLeftX, topLeftY, bottomRightX, bottomRightY = player.fixture:getBoundingBox( 1 )
+  --print("TL ("..topLeftX..","..topLeftY..") BR ("..bottomRightX..","..bottomRightY..")")
+--print(player.fixture:getBoundingBox(1).topLeftX..","..player.fixture:getBoundingBox(1).topLeftX..",".. player.fixture:getBoundingBox(1).bottomRightX..", ".. player.fixture:getBoundingBox(1).bottomRightY)
+end
+
+function loadWorld()
+  map = sti("testTest1.lua",{ "box2d" })
+  if lovephysics then
+    lovephysics:destroy()
+  end
+  lovephysics = love.physics.newWorld(0, 9.81 * 70, true)
+  lovephysics:setCallbacks(beginContact, endContact, preSolve, postSolve)
+
+  map:box2d_init(lovephysics)
   for k, object in pairs(map.objects) do
-    print (object.name)
+    --print (object.name)
       if object.name == "Player" then
           --playerTemp = object
           print("Setup player!")
@@ -50,33 +72,26 @@ function love.load()
           --break
       end
       if object.name == "mustach" then
-        print(object.x)
+        bonuses[k]=bonusClass.new(object.x, object.y, world, lovephysics)
+      end
+      if object.name == "lava" then
+        --print("Add lava: "..object.width.." "..object.height)
+        lavaBody = love.physics.newBody(lovephysics, object.x + (object.width/2), object.y,"static")
+        lavaShape = love.physics.newRectangleShape(0,0,object.width, object.height)
+        lavaFixture = love.physics.newFixture(lavaBody, lavaShape, 0)
+        lavaFixture:setUserData({ type="lava" })
       end
   end
   map:removeLayer("System")
-
-  text       = ""   -- we'll use this to put info text on the screen later
-  persisting = 0
-  --topLeftX, topLeftY, bottomRightX, bottomRightY = player.fixture:getBoundingBox( 1 )
-  --print("TL ("..topLeftX..","..topLeftY..") BR ("..bottomRightX..","..bottomRightY..")")
---print(player.fixture:getBoundingBox(1).topLeftX..","..player.fixture:getBoundingBox(1).topLeftX..",".. player.fixture:getBoundingBox(1).bottomRightX..", ".. player.fixture:getBoundingBox(1).bottomRightY)
 end
 
 function love.update(dt)
-  --world:update(dt)
-  local speed = 140
+  if gameState == "playing" then
+
   if love.keyboard.isDown("w") or love.keyboard.isDown("up") then
-      --player.y = player.y - speed * dt
       player:doJump()
-      --player.body:applyForce(0, 200)
-      --player.body:applyLinearImpulse(0,-100)
-      --player.body:applyLinearImpulse(0, -10)
   end
 
-  -- Move player down
-  --if love.keyboard.isDown("s") or love.keyboard.isDown("down") then
-  --    player.y = player.y + speed * dt
-  --end
 
   -- Move player left
   if love.keyboard.isDown("a") or love.keyboard.isDown("left") then
@@ -89,14 +104,7 @@ function love.update(dt)
       --player.x = player.x + speed * dt
       player.body:applyLinearImpulse(10, 0)
   end
-  --world:update(objects.player, self.player.x, self.player.y )
-  --local actualX, actualY, cols, len = world:move(player, player.x, player.y)
-  --player.x, player.y = actualX, actualY
-  ------ deal with the collisions
-  --for i=1,len do
-  --  print('collided with ' .. tostring(cols[i].other))
-  --  player.jump = false
-  --end
+
 
   lovephysics:update(dt)
 	map:update(dt)
@@ -108,28 +116,54 @@ function love.update(dt)
   if string.len(text) > 768 then    -- cleanup when 'text' gets too long
         text = ""
     end
-
+  end
+  if gameState == "gameover" then
+    if love.keyboard.isDown("space") then
+      gameState = "playing"
+      score = 0
+      attempts = attempts + 1
+      player:reset()
+      player = {}
+      bonuses = {}
+      --map = sti("testTest1.lua",{ "box2d" })
+      loadWorld()
+    end
+  end
 
 end
 
 function love.draw()
+  love.graphics.setBackgroundColor( 0, 66, 254 )
+  if gameState == "playing" then
+
   local showBoundingBoxes = true
   --local player = map.layers["Sprites"].player
   local tx = math.floor(player.body:getX() - love.graphics.getWidth() / 2)
   local ty = math.floor(player.body:getY() - love.graphics.getHeight() / 2)
   --love.graphics.translate(-tx, -ty)
+  love.graphics.setBackgroundColor( 0, 166, 254 )
 
 camera:attach()
---local cx,cy = camera:position()
---local offset_x = (cx - love.graphics.getWidth()) / 2
---local offset_y = (cy - love.graphics.getHeight()) / 2
---local dx,dy = player.body:getX() - camera.x, player.body:getY() - camera.y
---print("X "..(tx).." Y "..(ty))
 	-- Draw the map and all objects within
 	love.graphics.setColor(255, 255, 255)
 	map:draw(-tx, -ty)
   if showBoundingBoxes then
     map:box2d_draw()
+  end
+
+  for k, bonus in pairs(bonuses) do
+    if bonus.visible then
+      love.graphics.draw(
+          bonus.sprite,
+          bonus.body:getX(),
+          bonus.body:getY(),
+          0,
+          1,
+          1,
+          bonus.width/2,
+          bonus.height/2
+      )
+    end
   end
 
   love.graphics.draw(
@@ -150,20 +184,34 @@ camera:attach()
   end
 
 	love.graphics.setColor(255, 0, 0)
-  love.graphics.print(text, 50, 75)
+  love.graphics.print("Score "..score, tx+50, ty + 75)
   camera:detach()
+  end
+  if gameState == "gameover" then
+  love.graphics.setColor(255, 255, 255)
+
+  love.graphics.print("Gamover! your score was "..score,(love.graphics.getWidth() / 2)-100, love.graphics.getHeight() / 2)
+  love.graphics.print("This was your "..(attempts+1).." attept at finding the exit",(love.graphics.getWidth() / 2)-100, love.graphics.getHeight() / 2 +20)
+  love.graphics.print("Press spacebar to play again.",(love.graphics.getWidth() / 2)-100, love.graphics.getHeight() / 2 + 40)
+  end
 end
 
 function beginContact(a, b, coll)
   x,y = coll:getNormal()
   --text = text.."\n"..a:getUserData().." colliding with "..b:getUserData().." with a vector normal of: "..x..", "..y
-  text = text .."\n Collition vector normal of: "..x..", "..y
-  --if not a:isSensor() then
-    --print(a:getUserData().type)
-  --end
+  --text = text .."\n Collition vector normal of: "..x..", "..y
+
   if not b:isSensor() and b:getUserData().type == "player" and y < 0 then
     player.landed()
-    --print(b:getUserData().type)
+  end
+  if not b:isSensor() and b:getUserData().type == "bonus" then
+    score = score + 100
+    b:getUserData().visible = false
+    b:destroy()
+  end
+  if not b:isSensor() and b:getUserData().type == "lava" then
+    print("You died!")
+    gameState = "gameover"
   end
 end
 

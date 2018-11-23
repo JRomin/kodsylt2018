@@ -14,7 +14,7 @@ playerClass.new = function(x, y, bumpWorld, physicsWorld)
     self.body = love.physics.newBody(physicsWorld, self.x, self.y,"dynamic")
     self.shape = love.physics.newRectangleShape(0,0,self.width, self.height)
     self.fixture = love.physics.newFixture(self.body, self.shape, 1)
-    self.fixture:setFriction(1.0)
+    self.fixture:setFriction(0.5)
     self.fixture:setUserData(self)
     self.body:setPosition(self.x,self.y)
     self.body:setMass(1)
@@ -27,8 +27,12 @@ playerClass.new = function(x, y, bumpWorld, physicsWorld)
     self.doJump = function()
       self.jumpCount = self.jumpCount + 1
       if self.jumpCount < 5 then
-        self.body:applyLinearImpulse(0,-100)
+        self.body:applyLinearImpulse(0,-180)
       end
+    end
+
+    self.reset = function()
+      self.body:setPosition(self.x,self.y)
     end
 
     self.landed = function()
