@@ -277,7 +277,7 @@ return {
         },
         {
           id = 2,
-          name = "mustch",
+          name = "mustach",
           type = "bonus",
           shape = "rectangle",
           x = 803.908,

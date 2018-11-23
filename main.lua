@@ -7,6 +7,7 @@ require "player"
 local enemies = {}
 local player
 local lovephysics
+local bonuses = {}
 Camera = require "hump.camera"
 
 function love.load()
@@ -39,13 +40,17 @@ function love.load()
 
 
   for k, object in pairs(map.objects) do
+    print (object.name)
       if object.name == "Player" then
           --playerTemp = object
           print("Setup player!")
           print(object.id)
           player = playerClass.new(object.x, object.y, world, lovephysics)
           camera = Camera(player.body:getX(), player.body:getY())
-          break
+          --break
+      end
+      if object.name == "mustach" then
+        print(object.x)
       end
   end
   map:removeLayer("System")
@@ -115,11 +120,11 @@ function love.draw()
   --love.graphics.translate(-tx, -ty)
 
 camera:attach()
-local cx,cy = camera:position()
-local offset_x = (cx - love.graphics.getWidth()) / 2
-local offset_y = (cy - love.graphics.getHeight()) / 2
-local dx,dy = player.body:getX() - camera.x, player.body:getY() - camera.y
-print("X "..(tx).." Y "..(ty))
+--local cx,cy = camera:position()
+--local offset_x = (cx - love.graphics.getWidth()) / 2
+--local offset_y = (cy - love.graphics.getHeight()) / 2
+--local dx,dy = player.body:getX() - camera.x, player.body:getY() - camera.y
+--print("X "..(tx).." Y "..(ty))
 	-- Draw the map and all objects within
 	love.graphics.setColor(255, 255, 255)
 	map:draw(-tx, -ty)
