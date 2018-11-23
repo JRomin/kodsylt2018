@@ -53,7 +53,7 @@ function love.load()
 end
 
 function loadWorld()
-  map = sti("testTest1.lua",{ "box2d" })
+  map = sti("testTest2.lua",{ "box2d" })
   if lovephysics then
     lovephysics:destroy()
   end
@@ -69,7 +69,6 @@ function loadWorld()
           print(object.id)
           player = playerClass.new(object.x, object.y, world, lovephysics)
           camera = Camera(player.body:getX(), player.body:getY())
-          --break
       end
       if object.name == "mustach" then
         bonuses[k]=bonusClass.new(object.x, object.y, world, lovephysics)
@@ -80,6 +79,12 @@ function loadWorld()
         lavaShape = love.physics.newRectangleShape(0,0,object.width, object.height)
         lavaFixture = love.physics.newFixture(lavaBody, lavaShape, 0)
         lavaFixture:setUserData({ type="lava" })
+      end
+      if object.name == "exit" then
+      exitBody = love.physics.newBody(lovephysics, object.x + (object.width/2), object.y,"static")
+      exitShape = love.physics.newRectangleShape(0,0,object.width, object.height)
+      exitFixture = love.physics.newFixture(exitBody, exitShape, 0)
+      exitFixture:setUserData({ type="exit" })
       end
   end
   map:removeLayer("System")
@@ -95,13 +100,11 @@ function love.update(dt)
 
   -- Move player left
   if love.keyboard.isDown("a") or love.keyboard.isDown("left") then
-      --player.x = player.x - speed * dt
       player.body:applyLinearImpulse(-10, 0)
   end
 
   -- Move player right
   if love.keyboard.isDown("d") or love.keyboard.isDown("right") then
-      --player.x = player.x + speed * dt
       player.body:applyLinearImpulse(10, 0)
   end
 
@@ -125,23 +128,31 @@ function love.update(dt)
       player:reset()
       player = {}
       bonuses = {}
-      --map = sti("testTest1.lua",{ "box2d" })
       loadWorld()
     end
   end
-
+  if gameState == "done" then
+    if love.keyboard.isDown("space") then
+      gameState = "playing"
+      score = 0
+      attempts = 0
+      player:reset()
+      player = {}
+      bonuses = {}
+      loadWorld()
+    end
+  end
 end
 
 function love.draw()
-  love.graphics.setBackgroundColor( 0, 66, 254 )
+  love.graphics.setBackgroundColor( 0, 20, 250 )
   if gameState == "playing" then
 
-  local showBoundingBoxes = true
+  local showBoundingBoxes = false
   --local player = map.layers["Sprites"].player
   local tx = math.floor(player.body:getX() - love.graphics.getWidth() / 2)
   local ty = math.floor(player.body:getY() - love.graphics.getHeight() / 2)
   --love.graphics.translate(-tx, -ty)
-  love.graphics.setBackgroundColor( 0, 166, 254 )
 
 camera:attach()
 	-- Draw the map and all objects within
@@ -176,22 +187,28 @@ camera:attach()
       player.width/2,
       player.height/2
   )
-  --love.graphics.rectangle("line", player.body:getX(), player.body:getY(), player.width, player.height)
 
   if showBoundingBoxes then
     topLeftX, topLeftY, bottomRightX, bottomRightY = player.fixture:getBoundingBox( 1 )
     love.graphics.rectangle("line", topLeftX, topLeftY, bottomRightX - topLeftX, bottomRightY - topLeftY)
   end
 
-	love.graphics.setColor(255, 0, 0)
+	love.graphics.setColor(0, 0, 0)
   love.graphics.print("Score "..score, tx+50, ty + 75)
   camera:detach()
   end
   if gameState == "gameover" then
-  love.graphics.setColor(255, 255, 255)
+  love.graphics.setColor(0, 0, 0)
 
   love.graphics.print("Gamover! your score was "..score,(love.graphics.getWidth() / 2)-100, love.graphics.getHeight() / 2)
   love.graphics.print("This was your "..(attempts+1).." attept at finding the exit",(love.graphics.getWidth() / 2)-100, love.graphics.getHeight() / 2 +20)
+  love.graphics.print("Press spacebar to play again.",(love.graphics.getWidth() / 2)-100, love.graphics.getHeight() / 2 + 40)
+  end
+  if gameState == "done" then
+  love.graphics.setColor(0, 0, 0)
+
+  love.graphics.print("You found the exit! your score was "..score,(love.graphics.getWidth() / 2)-100, love.graphics.getHeight() / 2)
+  love.graphics.print("You made it here on "..(attempts+1).." attepts",(love.graphics.getWidth() / 2)-100, love.graphics.getHeight() / 2 +20)
   love.graphics.print("Press spacebar to play again.",(love.graphics.getWidth() / 2)-100, love.graphics.getHeight() / 2 + 40)
   end
 end
@@ -210,8 +227,13 @@ function beginContact(a, b, coll)
     b:destroy()
   end
   if not b:isSensor() and b:getUserData().type == "lava" then
-    print("You died!")
+--    print("You died!")
     gameState = "gameover"
+    ---player.landed()
+  end
+  if not b:isSensor() and b:getUserData().type == "exit" then
+    --print("You died!")
+    gameState = "done"
   end
 end
 
