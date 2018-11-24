@@ -12,6 +12,7 @@ local bonuses = {}
 local score = 0
 local gameState = "playing"
 local attempts = 0
+local totalBonuses = 0
 Camera = require "hump.camera"
 
 function love.load()
@@ -72,6 +73,7 @@ function loadWorld()
       end
       if object.name == "mustach" then
         bonuses[k]=bonusClass.new(object.x, object.y, world, lovephysics)
+        totalBonuses = totalBonuses + 1
       end
       if object.name == "lava" then
         --print("Add lava: "..object.width.." "..object.height)
@@ -124,6 +126,7 @@ function love.update(dt)
     if love.keyboard.isDown("space") then
       gameState = "playing"
       score = 0
+      totalBonuses = 0
       attempts = attempts + 1
       player:reset()
       player = {}
@@ -194,7 +197,7 @@ camera:attach()
   end
 
 	love.graphics.setColor(0, 0, 0)
-  love.graphics.print("Score "..score, tx+50, ty + 75)
+  love.graphics.print("Score "..score.." of "..(totalBonuses*100), tx+25, ty + 25)
   camera:detach()
   end
   if gameState == "gameover" then

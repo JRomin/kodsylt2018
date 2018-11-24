@@ -267,7 +267,7 @@
     <property name="score" type="int" value="10"/>
    </properties>
   </object>
-  <object id="6" name="mustach" type="bonus" x="1577" y="399.09" width="70" height="65.8198">
+  <object id="6" name="mustach" type="bonus" x="1557" y="399.09" width="70" height="65.8198">
    <properties>
     <property name="score" type="int" value="10"/>
    </properties>
@@ -323,7 +323,7 @@
     <property name="score" type="int" value="10"/>
    </properties>
   </object>
-  <object id="19" name="lava" type="lava" x="2098.5" y="1439.56" width="1807" height="20.4413"/>
+  <object id="19" name="lava" type="lava" x="2058.5" y="1423.56" width="1807" height="20.4413"/>
   <object id="20" name="mustach" type="bonus" x="2397" y="1615.09" width="70" height="65.8198">
    <properties>
     <property name="score" type="int" value="10"/>
@@ -339,39 +339,39 @@
     <property name="score" type="int" value="10"/>
    </properties>
   </object>
-  <object id="23" name="lava" type="lava" x="1750.5" y="1858.14" width="205.667" height="21.8557"/>
-  <object id="24" name="lava" type="lava" x="2241.17" y="1856.48" width="131" height="21.8557"/>
-  <object id="25" name="lava" type="lava" x="2591.83" y="1855.06" width="200.333" height="23.2702"/>
-  <object id="26" name="lava" type="lava" x="2873.17" y="1857.14" width="132.333" height="21.8557"/>
+  <object id="23" name="lava" type="lava" x="1722.5" y="1830.14" width="205.667" height="21.8557"/>
+  <object id="24" name="lava" type="lava" x="2213.17" y="1836.48" width="131" height="21.8557"/>
+  <object id="25" name="lava" type="lava" x="2559.83" y="1835.06" width="200.333" height="23.2702"/>
+  <object id="26" name="lava" type="lava" x="2825.17" y="1837.14" width="132.333" height="21.8557"/>
   <object id="27" name="mustach" type="bonus" x="5721" y="535.09" width="70" height="65.8198">
    <properties>
     <property name="score" type="int" value="10"/>
    </properties>
   </object>
-  <object id="28" name="mustach" type="bonus" x="6205" y="827.09" width="70" height="65.8198">
+  <object id="28" name="mustach" type="bonus" x="6097" y="827.09" width="70" height="65.8198">
    <properties>
     <property name="score" type="int" value="10"/>
    </properties>
   </object>
-  <object id="29" name="mustach" type="bonus" x="6197" y="951.09" width="70" height="65.8198">
+  <object id="29" name="mustach" type="bonus" x="6093" y="951.09" width="70" height="65.8198">
    <properties>
     <property name="score" type="int" value="10"/>
    </properties>
   </object>
-  <object id="30" name="mustach" type="bonus" x="5513" y="847.09" width="70" height="65.8198">
+  <object id="30" name="mustach" type="bonus" x="5485" y="847.09" width="70" height="65.8198">
    <properties>
     <property name="score" type="int" value="10"/>
    </properties>
   </object>
-  <object id="31" name="mustach" type="bonus" x="1273" y="2783.09" width="70" height="65.8198">
+  <object id="31" name="mustach" type="bonus" x="1257" y="2755.09" width="70" height="65.8198">
    <properties>
     <property name="score" type="int" value="10"/>
    </properties>
   </object>
-  <object id="32" name="lava" type="lava" x="2245.17" y="2703.15" width="200.333" height="20.8485"/>
-  <object id="33" name="lava" type="lava" x="2099.83" y="2706.52" width="68.333" height="17.8182"/>
-  <object id="34" name="lava" type="lava" x="2942.5" y="2704.48" width="200.333" height="20.8485"/>
-  <object id="35" name="lava" type="lava" x="3427.83" y="2705.18" width="68.333" height="17.8182"/>
+  <object id="32" name="lava" type="lava" x="2209.17" y="2667.15" width="200.333" height="20.8485"/>
+  <object id="33" name="lava" type="lava" x="2067.83" y="2666.52" width="68.333" height="17.8182"/>
+  <object id="34" name="lava" type="lava" x="2902.5" y="2664.48" width="200.333" height="20.8485"/>
+  <object id="35" name="lava" type="lava" x="3379.83" y="2665.18" width="68.333" height="17.8182"/>
   <object id="36" name="mustach" type="bonus" x="2643.79" y="2382.24" width="70" height="65.8198">
    <properties>
     <property name="score" type="int" value="10"/>
@@ -382,41 +382,41 @@
     <property name="score" type="int" value="10"/>
    </properties>
   </object>
-  <object id="38" name="mustach" type="bonus" x="5756.85" y="1959.34" width="70" height="65.8198">
+  <object id="38" name="mustach" type="bonus" x="5684.85" y="1959.34" width="70" height="65.8198">
    <properties>
     <property name="score" type="int" value="10"/>
    </properties>
   </object>
-  <object id="39" name="mustach" type="bonus" x="5852.88" y="1960.77" width="70" height="65.8198">
+  <object id="39" name="mustach" type="bonus" x="5776.88" y="1960.77" width="70" height="65.8198">
    <properties>
     <property name="score" type="int" value="10"/>
    </properties>
   </object>
-  <object id="40" name="lava" type="lava" x="6233.17" y="1161.81" width="406.394" height="21.8557"/>
-  <object id="41" name="lava" type="lava" x="1399.83" y="3332.64" width="267" height="20.8485"/>
-  <object id="42" name="lava" type="lava" x="2033.17" y="3332.42" width="200.333" height="23.8788"/>
-  <object id="43" name="lava" type="lava" x="4337.89" y="4241.91" width="204.575" height="20.8485"/>
-  <object id="46" name="mustach" type="bonus" x="5213" y="3035.09" width="70" height="65.8198">
+  <object id="40" name="lava" type="lava" x="6137.17" y="1141.81" width="406.394" height="21.8557"/>
+  <object id="41" name="lava" type="lava" x="1379.83" y="3284.64" width="267" height="20.8485"/>
+  <object id="42" name="lava" type="lava" x="2001.17" y="3280.42" width="200.333" height="23.8788"/>
+  <object id="43" name="lava" type="lava" x="4277.89" y="4177.91" width="204.575" height="20.8485"/>
+  <object id="46" name="mustach" type="bonus" x="5129" y="2983.09" width="70" height="65.8198">
    <properties>
     <property name="score" type="int" value="10"/>
    </properties>
   </object>
-  <object id="47" name="mustach" type="bonus" x="5281" y="3667.09" width="70" height="65.8198">
+  <object id="47" name="mustach" type="bonus" x="5213" y="3623.09" width="70" height="65.8198">
    <properties>
     <property name="score" type="int" value="10"/>
    </properties>
   </object>
-  <object id="48" name="mustach" type="bonus" x="3705" y="3131.09" width="70" height="65.8198">
+  <object id="48" name="mustach" type="bonus" x="3737" y="3079.09" width="70" height="65.8198">
    <properties>
     <property name="score" type="int" value="10"/>
    </properties>
   </object>
-  <object id="49" name="mustach" type="bonus" x="1465" y="3847.09" width="70" height="65.8198">
+  <object id="49" name="mustach" type="bonus" x="1441" y="3787.09" width="70" height="65.8198">
    <properties>
     <property name="score" type="int" value="10"/>
    </properties>
   </object>
-  <object id="50" name="mustach" type="bonus" x="585" y="4011.09" width="70" height="65.8198">
+  <object id="50" name="mustach" type="bonus" x="609" y="4011.09" width="70" height="65.8198">
    <properties>
     <property name="score" type="int" value="10"/>
    </properties>
@@ -431,13 +431,13 @@
     <property name="score" type="int" value="10"/>
    </properties>
   </object>
-  <object id="53" name="lava" type="lava" x="2027.83" y="3760.15" width="344.333" height="20.8485"/>
-  <object id="54" name="mustach" type="bonus" x="2396.77" y="5718.62" width="70" height="65.8198">
+  <object id="53" name="lava" type="lava" x="1995.83" y="3700.15" width="344.333" height="20.8485"/>
+  <object id="54" name="mustach" type="bonus" x="2348.77" y="5646.62" width="70" height="65.8198">
    <properties>
     <property name="score" type="int" value="10"/>
    </properties>
   </object>
-  <object id="55" name="mustach" type="bonus" x="2547.48" y="5783.79" width="70" height="65.8198">
+  <object id="55" name="mustach" type="bonus" x="2459.48" y="5703.79" width="70" height="65.8198">
    <properties>
     <property name="score" type="int" value="10"/>
    </properties>
@@ -452,12 +452,12 @@
     <property name="score" type="int" value="10"/>
    </properties>
   </object>
-  <object id="58" name="mustach" type="bonus" x="4531.19" y="4749.17" width="70" height="65.8198">
+  <object id="58" name="mustach" type="bonus" x="4175.19" y="4721.17" width="70" height="65.8198">
    <properties>
     <property name="score" type="int" value="10"/>
    </properties>
   </object>
-  <object id="59" name="mustach" type="bonus" x="3842.8" y="4337.76" width="70" height="65.8198">
+  <object id="59" name="mustach" type="bonus" x="3974.8" y="4305.76" width="70" height="65.8198">
    <properties>
     <property name="score" type="int" value="10"/>
    </properties>
@@ -482,27 +482,27 @@
     <property name="score" type="int" value="10"/>
    </properties>
   </object>
-  <object id="64" name="lava" type="lava" x="1540.79" y="4789.37" width="193.359" height="36"/>
-  <object id="65" name="lava" type="lava" x="1960.35" y="4785.3" width="270.753" height="36"/>
-  <object id="66" name="lava" type="lava" x="3007.19" y="5835.29" width="209.653" height="36"/>
-  <object id="67" name="lava" type="lava" x="3422.67" y="5836.29" width="213.726" height="36"/>
-  <object id="69" name="exit" type="exit" x="5752.66" y="3885.72" width="39.604" height="101.839"/>
+  <object id="64" name="lava" type="lava" x="1524.79" y="4737.37" width="193.359" height="36"/>
+  <object id="65" name="lava" type="lava" x="1932.35" y="4737.3" width="270.753" height="36"/>
+  <object id="66" name="lava" type="lava" x="2963.19" y="5767.29" width="209.653" height="36"/>
+  <object id="67" name="lava" type="lava" x="3374.67" y="5768.29" width="213.726" height="36"/>
+  <object id="69" name="exit" type="exit" x="5676.66" y="3829.72" width="39.604" height="101.839"/>
   <object id="71" name="mustach" type="bonus" x="4165.59" y="4015.22" width="70" height="65.8198">
    <properties>
     <property name="score" type="int" value="10"/>
    </properties>
   </object>
-  <object id="72" name="mustach" type="bonus" x="4828.54" y="3873.4" width="70" height="65.8198">
+  <object id="72" name="mustach" type="bonus" x="4724.54" y="3785.4" width="70" height="65.8198">
    <properties>
     <property name="score" type="int" value="10"/>
    </properties>
   </object>
-  <object id="73" name="mustach" type="bonus" x="4070.91" y="2855.07" width="70" height="65.8198">
+  <object id="73" name="mustach" type="bonus" x="4022.91" y="2727.07" width="70" height="65.8198">
    <properties>
     <property name="score" type="int" value="10"/>
    </properties>
   </object>
-  <object id="74" name="mustach" type="bonus" x="3166.63" y="3417.19" width="70" height="65.8198">
+  <object id="74" name="mustach" type="bonus" x="3134.63" y="3413.19" width="70" height="65.8198">
    <properties>
     <property name="score" type="int" value="10"/>
    </properties>
